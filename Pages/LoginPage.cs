@@ -1,24 +1,53 @@
-﻿using OpenQA.Selenium;
+﻿using AuthenticationTrackingAuthTests.Helpers;
+using OpenQA.Selenium;
 
-namespace TestProjectName.Pages
+namespace AuthenticationTrackingAuthTests.Pages
 {
     public class LoginPage
     {
-        //[FindsBy(How = How.Id, Using ="")]
-        //IWebElement LoginTextField;
+        private IWebDriver _driver;
 
-        //[FindsBy(How = How.CssSelector, Using = "input[type='password']")]
-        //IWebElement PasswordTextField;
+        private By LoginTextFieldLocator => By.Id("login");
 
-        //[FindsBy(How = How.ClassName, Using = "LoginButton")]
-        //IWebElement LoginButton; 
+        private By PasswordTextFieldLocator => By.Id("password");
+
+        private By SubmitButtonLocator => By.CssSelector("button[type='submit']");
+
+        private By PopupBodyLabel => By.ClassName("popup-body");
+
+        public LoginPage()
+        {
+            _driver = Driver.GetDriver();
+        }
+
+        public void EnterLogin(string login)
+        {
+            Wait.WaitForElementVisible(_driver, LoginTextFieldLocator, 10);
+            _driver.FindElement(LoginTextFieldLocator).SendKeys(login);
+        }
+
+        public void EnterPassword(string password)
+        {
+            _driver.FindElement(PasswordTextFieldLocator).SendKeys(password);
+        }
+
+        public void ClickSubmitButton()
+        {
+            Wait.WaitForElementClickable(_driver, SubmitButtonLocator, 10);
+            _driver.FindElement(SubmitButtonLocator).Click();
+        }
 
         public void Login(string login, string password)
         {
-           // WaitForPageLoad();
-            //LoginTextField.SendKeys(login);
-            //PasswordTextField.SendKeys(password);
-            //LoginButton.Click();
+            EnterLogin(login);
+            EnterPassword(password);
+            ClickSubmitButton();
+        }
+
+        public bool IsPopupOpen()
+        {
+            Wait.WaitForPageLoadComplete(_driver);
+            return _driver.FindElement(PopupBodyLabel).Displayed;
         }
     }
 }

@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace AuthenticationTrackingAuthTests.Scenarios
+namespace AuthenticationTrackingAuth.Scenarios
 {
     using TechTalk.SpecFlow;
     using System;
@@ -79,12 +79,12 @@ namespace AuthenticationTrackingAuthTests.Scenarios
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Unauthorized access attempt to tracking site")]
-        public void UnauthorizedAccessAttemptToTrackingSite()
+        [NUnit.Framework.DescriptionAttribute("Unauthorized access attempt to the tracking site")]
+        public void UnauthorizedAccessAttemptToTheTrackingSite()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unauthorized access attempt to tracking site", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unauthorized access attempt to the tracking site", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -126,13 +126,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 12
- testRunner.Given("Valid user credentials are already registered", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("ValidUser credentials are already registered", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 13
  testRunner.And("I’m on the login screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 14
- testRunner.When("I enter a valid username ValidName and password ValidPassword and submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I enter a valid username and password and submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 15
  testRunner.Then("I am logged in successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

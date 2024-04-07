@@ -1,35 +1,35 @@
-﻿using TechTalk.SpecFlow;
-using TestProjectName.Pages;
+﻿using AuthenticationTrackingAuthTests.Configurations;
+using AuthenticationTrackingAuthTests.Helpers;
+using AuthenticationTrackingAuthTests.Models;
+using AuthenticationTrackingAuthTests.Pages;
+using FluentAssertions;
+using TechTalk.SpecFlow;
 
-namespace TestProjectName.Tests.Steps;
-
-public class LoginPageSteps
+namespace AuthenticationTrackingAuthTests.Steps
 {
-    LoginPage loginPage = new LoginPage();
-
-    #region Givens
-    [Given(@"Valid user credentials are already registered")]
-    public void ValidUserCredentialsAreAlreadyRegistered()
+    [Binding]
+    public class LoginPageSteps
     {
-        //loginPage.RegisterUser();
-    }
+        private readonly LoginPage _loginPage = new LoginPage();
+        private User _user;
 
-    [Given(@"I’m on the login screen")]
-    public void UserOnTheLoginScreen()
-    {
-        //loginPage.NavigateToLoginPage();
-    }
+        [Given(@"(ValidUser|NotValidUser) credentials are already registered")]
+        public void ValidUserCredentialsAreAlreadyRegistered(string userName)
+        {
+            _user = Credentials.GetUser(userName);
+            Context.Set("user", _user);
+        }
 
-    [When(@"I enter a valid username (.*) and password (.*) and submit")]
-    public void EnterValidUsernameAndPasswordAndSubmit(string userName, string password)
-    {
-        loginPage.Login(userName, password);
-    }
+        [When(@"I enter a valid username and password and submit")]
+        public void EnterValidUsernameAndPasswordAndSubmit()
+        {
+            _loginPage.Login(_user.Login, _user.Password);
+        }
 
-    [Then(@"I am logged in successfully")]
-    public void LoggedInSuccessfully()
-    {
-        //loginPage.VerifyLogin();
+        [Then(@"I am presented with a login screen")]
+        public void ThenIAmPresentedWithALoginScreen()
+        {
+            _loginPage.IsPopupOpen().Should().BeTrue("Login screen should be displayed");
+        }
     }
-    #endregion
 }
